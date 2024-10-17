@@ -33,12 +33,14 @@ export const getCar = async (id) => {
 // Create a new car
 export const createCar = async (carData) => {
   try {
+    // Calculate total price based on the selected features
+    const totalPrice = calculateTotalPrice(carData);
     const response = await fetch(`${API_URL}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(carData),
+      body: JSON.stringify({ ...carData, totalPrice }), // Send the total price with car data
     });
     if (!response.ok) {
       throw new Error('Error creating car');
@@ -54,12 +56,14 @@ export const createCar = async (carData) => {
 // Update an existing car by ID
 export const updateCar = async (id, updatedCarData) => {
   try {
+    // Recalculate the total price when updating
+    const totalPrice = calculateTotalPrice(updatedCarData);
     const response = await fetch(`${API_URL}/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(updatedCarData),
+      body: JSON.stringify({ ...updatedCarData, totalPrice }),
     });
     if (!response.ok) {
       throw new Error(`Error updating car with ID ${id}`);
@@ -86,4 +90,25 @@ export const deleteCar = async (id) => {
     console.error(`Error deleting car with ID ${id}:`, error);
     throw error;
   }
+};
+
+// Helper function to calculate the total price based on selected features
+const calculateTotalPrice = (carData) => {
+  let totalPrice = 0;
+  
+  // Assuming each feature has a price associated with it
+  if (carData.model && carData.model.price) {
+    totalPrice += carData.model.price;
+  }
+  if (carData.color && carData.color.price) {
+    totalPrice += carData.color.price;
+  }
+  if (carData.engineType && carData.engineType.price) {
+    totalPrice += carData.engineType.price;
+  }
+  if (carData.interior && carData.interior.price) {
+    totalPrice += carData.interior.price;
+  }
+
+  return totalPrice;
 };

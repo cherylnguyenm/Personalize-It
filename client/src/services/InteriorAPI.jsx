@@ -3,9 +3,9 @@ const INTERIOR_API_URL = '/api/interiors';
 // Get all interiors
 export const getAllInteriors = async () => {
   try {
-    const response = await fetch(`${INTERIOR_API_URL}`);
+    const response = await fetch(INTERIOR_API_URL);
     if (!response.ok) {
-      throw new Error('Error fetching interiors');
+      throw new Error(`Error fetching interiors: ${response.statusText}`);
     }
     const data = await response.json();
     return data;
@@ -20,7 +20,7 @@ export const getInterior = async (id) => {
   try {
     const response = await fetch(`${INTERIOR_API_URL}/${id}`);
     if (!response.ok) {
-      throw new Error(`Error fetching interior with ID ${id}`);
+      throw new Error(`Error fetching interior with ID ${id}: ${response.statusText}`);
     }
     const data = await response.json();
     return data;
@@ -33,7 +33,7 @@ export const getInterior = async (id) => {
 // Create a new interior
 export const createInterior = async (interiorData) => {
   try {
-    const response = await fetch(`${INTERIOR_API_URL}`, {
+    const response = await fetch(INTERIOR_API_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -41,7 +41,7 @@ export const createInterior = async (interiorData) => {
       body: JSON.stringify(interiorData),
     });
     if (!response.ok) {
-      throw new Error('Error creating interior');
+      throw new Error(`Error creating interior: ${response.statusText}`);
     }
     const data = await response.json();
     return data;
@@ -62,7 +62,7 @@ export const updateInterior = async (id, updatedInteriorData) => {
       body: JSON.stringify(updatedInteriorData),
     });
     if (!response.ok) {
-      throw new Error(`Error updating interior with ID ${id}`);
+      throw new Error(`Error updating interior with ID ${id}: ${response.statusText}`);
     }
     const data = await response.json();
     return data;
@@ -79,7 +79,7 @@ export const deleteInterior = async (id) => {
       method: 'DELETE',
     });
     if (!response.ok) {
-      throw new Error(`Error deleting interior with ID ${id}`);
+      throw new Error(`Error deleting interior with ID ${id}: ${response.statusText}`);
     }
     return true;
   } catch (error) {

@@ -7,6 +7,7 @@ import { getAllModels } from '../services/ModelAPI';
 import { getAllInteriors } from '../services/InteriorAPI';
 import { calculateTotalPrice } from '../utilities/calcprice';
 import { validateFeatureCombination } from '../utilities/validateFeatures';
+import '../css/CreateCar.css';
 
 const CreateCar = () => {
   const [formData, setFormData] = useState({
@@ -21,11 +22,11 @@ const CreateCar = () => {
   const [engineTypes, setEngineTypes] = useState([]);
   const [models, setModels] = useState([]);
   const [interiors, setInteriors] = useState([]);
+  const [activeCategory, setActiveCategory] = useState('model'); // Track active category (model, color, etc.)
 
-  const navigate = useNavigate(); // For navigation after creation
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch options for colors, engine types, models, and interiors
     const fetchOptions = async () => {
       try {
         setColors(await getAllColors());
@@ -39,15 +40,21 @@ const CreateCar = () => {
     fetchOptions();
   }, []);
 
-  const handleChange = (e) => {
-    setFormData({
+  // Handle feature selection and real-time price update
+  const handleChange = (name, value) => {
+    const updatedFormData = {
       ...formData,
-      [e.target.name]: e.target.value,
-    });
+      [name]: value,
+    };
 
-    // Recalculate total price on option change
-    const totalPrice = calculateTotalPrice(formData, models, colors, engineTypes, interiors);
-    setFormData((prevFormData) => ({ ...prevFormData, totalPrice }));
+    // Recalculate the total price
+    const totalPrice = calculateTotalPrice(updatedFormData, models, colors, engineTypes, interiors);
+
+    // Update the formData and totalPrice
+    setFormData({
+      ...updatedFormData,
+      totalPrice: totalPrice,
+    });
   };
 
   const handleSubmit = async (e) => {
@@ -63,67 +70,121 @@ const CreateCar = () => {
     try {
       await createCar(formData);
       alert('Car created successfully');
-      navigate('/customcars'); // Redirect to view cars page
+      navigate('/customcars');  // Navigate to car listing page after creation
     } catch (error) {
       console.error('Error creating car:', error);
     }
   };
 
   return (
-    <div>
+    <div className="create-car-container">
       <h1>Create Your Custom Car</h1>
-      <form onSubmit={handleSubmit}>
-        <label>Model</label>
-        <select name="model" value={formData.model} onChange={handleChange}>
-          <option value="">Select Model</option>
+
+      {/* Feature selection buttons */}
+      <div className="feature-buttons">
+        <button onClick={() => setActiveCategory('model')} className={activeCategory === 'model' ? 'active' : ''}>
+          Model
+        </button>
+        <button onClick={() => setActiveCategory('color')} className={activeCategory === 'color' ? 'active' : ''}>
+          Color
+        </button>
+        <button onClick={() => setActiveCategory('engineType')} className={activeCategory === 'engineType' ? 'active' : ''}>
+          Engine Type
+        </button>
+        <button onClick={() => setActiveCategory('interior')} className={activeCategory === 'interior' ? 'active' : ''}>
+          Interior
+        </button>
+      </div>
+
+      {/* Display forms based on active category */}
+      {activeCategory === 'model' && (
+        <div className="model-options">
+          <h3>Select Model</h3>
           {models.map((model) => (
-            <option key={model.id} value={model.modelname}>
-              {model.modelname}
-            </option>
+            <div key={model.id} className={`option ${formData.model === model.modelname ? 'selected' : ''}`}>
+              <img src={model.image} alt={model.modelname} />
+              <label>
+                <input
+                  type="radio"
+                  name="model"
+                  value={model.modelname}
+                  checked={formData.model === model.modelname}
+                  onChange={() => handleChange('model', model.modelname)}
+                />
+                {model.modelname} - ${model.price}
+              </label>
+            </div>
           ))}
-        </select>
+        </div>
+      )}
 
-        <label>Color</label>
-        <select name="color" value={formData.color} onChange={handleChange}>
-          <option value="">Select Color</option>
+      {activeCategory === 'color' && (
+        <div className="color-options">
+          <h3>Select Color</h3>
           {colors.map((color) => (
-            <option key={color.id} value={color.colorname}>
-              {color.colorname}
-            </option>
+            <div key={color.id} className={`option ${formData.color === color.colorname ? 'selected' : ''}`}>
+              <img src={color.image} alt={color.colorname} />
+              <label>
+                <input
+                  type="radio"
+                  name="color"
+                  value={color.colorname}
+                  checked={formData.color === color.colorname}
+                  onChange={() => handleChange('color', color.colorname)}
+                />
+                {color.colorname} - ${color.price}
+              </label>
+            </div>
           ))}
-        </select>
+        </div>
+      )}
 
-        <label>Engine Type</label>
-        <select name="engineType" value={formData.engineType} onChange={handleChange}>
-          <option value="">Select Engine Type</option>
+      {activeCategory === 'engineType' && (
+        <div className="engine-options">
+          <h3>Select Engine Type</h3>
           {engineTypes.map((engine) => (
-            <option key={engine.id} value={engine.enginename}>
-              {engine.enginename}
-            </option>
+            <div key={engine.id} className={`option ${formData.engineType === engine.enginename ? 'selected' : ''}`}>
+              <img src={engine.image} alt={engine.enginename} />
+              <label>
+                <input
+                  type="radio"
+                  name="engineType"
+                  value={engine.enginename}
+                  checked={formData.engineType === engine.enginename}
+                  onChange={() => handleChange('engineType', engine.enginename)}
+                />
+                {engine.enginename} - ${engine.price}
+              </label>
+            </div>
           ))}
-        </select>
+        </div>
+      )}
 
-        <label>Interior</label>
-        <select name="interior" value={formData.interior} onChange={handleChange}>
-          <option value="">Select Interior</option>
+      {activeCategory === 'interior' && (
+        <div className="interior-options">
+          <h3>Select Interior</h3>
           {interiors.map((interior) => (
-            <option key={interior.id} value={interior.interiortype}>
-              {interior.interiortype}
-            </option>
+            <div key={interior.id} className={`option ${formData.interior === interior.interiortype ? 'selected' : ''}`}>
+              <img src={interior.image} alt={interior.interiortype} />
+              <label>
+                <input
+                  type="radio"
+                  name="interior"
+                  value={interior.interiortype}
+                  checked={formData.interior === interior.interiortype}
+                  onChange={() => handleChange('interior', interior.interiortype)}
+                />
+                {interior.interiortype} - ${interior.price}
+              </label>
+            </div>
           ))}
-        </select>
+        </div>
+      )}
 
-        <label>Total Price</label>
-        <input
-          type="number"
-          name="totalPrice"
-          value={formData.totalprice}
-          onChange={handleChange}
-          readOnly // Make total price read-only since it is calculated dynamically
-        />
+      {/* Display total price */}
+      <h3>Total Price: ${formData.totalPrice.toFixed(2)}</h3>
 
-        <button type="submit">Create Car</button>
-      </form>
+      <button onClick={handleSubmit}>Create Car</button>
     </div>
   );
 };

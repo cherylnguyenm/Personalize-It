@@ -3,9 +3,9 @@ const ENGINE_TYPE_API_URL = '/api/engine-types';
 // Get all engine types
 export const getAllEngineTypes = async () => {
   try {
-    const response = await fetch(`${ENGINE_TYPE_API_URL}`);
+    const response = await fetch(ENGINE_TYPE_API_URL);
     if (!response.ok) {
-      throw new Error('Error fetching engine types');
+      throw new Error(`Error fetching engine types: ${response.statusText}`);
     }
     const data = await response.json();
     return data;
@@ -20,7 +20,7 @@ export const getEngineType = async (id) => {
   try {
     const response = await fetch(`${ENGINE_TYPE_API_URL}/${id}`);
     if (!response.ok) {
-      throw new Error(`Error fetching engine type with ID ${id}`);
+      throw new Error(`Error fetching engine type with ID ${id}: ${response.statusText}`);
     }
     const data = await response.json();
     return data;
@@ -33,7 +33,7 @@ export const getEngineType = async (id) => {
 // Create a new engine type
 export const createEngineType = async (engineTypeData) => {
   try {
-    const response = await fetch(`${ENGINE_TYPE_API_URL}`, {
+    const response = await fetch(ENGINE_TYPE_API_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -41,7 +41,7 @@ export const createEngineType = async (engineTypeData) => {
       body: JSON.stringify(engineTypeData),
     });
     if (!response.ok) {
-      throw new Error('Error creating engine type');
+      throw new Error(`Error creating engine type: ${response.statusText}`);
     }
     const data = await response.json();
     return data;
@@ -62,7 +62,7 @@ export const updateEngineType = async (id, updatedEngineTypeData) => {
       body: JSON.stringify(updatedEngineTypeData),
     });
     if (!response.ok) {
-      throw new Error(`Error updating engine type with ID ${id}`);
+      throw new Error(`Error updating engine type with ID ${id}: ${response.statusText}`);
     }
     const data = await response.json();
     return data;
@@ -79,7 +79,7 @@ export const deleteEngineType = async (id) => {
       method: 'DELETE',
     });
     if (!response.ok) {
-      throw new Error(`Error deleting engine type with ID ${id}`);
+      throw new Error(`Error deleting engine type with ID ${id}: ${response.statusText}`);
     }
     return true;
   } catch (error) {

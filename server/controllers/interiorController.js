@@ -3,7 +3,7 @@ import { pool } from '../config/database.js';
 // Get all interior types
 const getInteriors = async (req, res) => {
   try {
-    const results = await pool.query('SELECT * FROM Interior ORDER BY id ASC');
+    const results = await pool.query('SELECT id, interiorType, price, image FROM Interior ORDER BY id ASC');
     res.status(200).json(results.rows);
   } catch (error) {
     res.status(409).json({ error: error.message });
@@ -14,30 +14,30 @@ const getInteriors = async (req, res) => {
 const getInteriorById = async (req, res) => {
   try {
     const { id } = req.params;
-    const results = await pool.query('SELECT * FROM Interior WHERE id = $1', [id]);
+    const results = await pool.query('SELECT id, interiorType, price, image FROM Interior WHERE id = $1', [id]);
     res.status(200).json(results.rows[0]);
   } catch (error) {
     res.status(409).json({ error: error.message });
   }
 };
 
-// Create a new interior type
+// Create a new interior type with price and image
 const createInterior = async (req, res) => {
   try {
-    const { interiorType } = req.body;
-    const results = await pool.query('INSERT INTO Interior (interiorType) VALUES ($1) RETURNING *', [interiorType]);
+    const { interiorType, price, image } = req.body;
+    const results = await pool.query('INSERT INTO Interior (interiorType, price, image) VALUES ($1, $2, $3) RETURNING *', [interiorType, price, image]);
     res.status(201).json(results.rows[0]);
   } catch (error) {
     res.status(409).json({ error: error.message });
   }
 };
 
-// Update an interior type
+// Update an interior type with price and image
 const updateInterior = async (req, res) => {
   try {
     const { id } = req.params;
-    const { interiorType } = req.body;
-    const results = await pool.query('UPDATE Interior SET interiorType = $1 WHERE id = $2 RETURNING *', [interiorType, id]);
+    const { interiorType, price, image } = req.body;
+    const results = await pool.query('UPDATE Interior SET interiorType = $1, price = $2, image = $3 WHERE id = $4 RETURNING *', [interiorType, price, image, id]);
     res.status(200).json(results.rows[0]);
   } catch (error) {
     res.status(409).json({ error: error.message });

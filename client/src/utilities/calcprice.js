@@ -10,28 +10,28 @@
  export const calculateTotalPrice = (selectedOptions, modelPrices, colorPrices, engineTypePrices, interiorPrices) => {
     let totalPrice = 0;
   
-    // Find the price of the selected model
-    const selectedModel = modelPrices.find(model => model.modelName === selectedOptions.model);
+    // Find the price of the selected model and add it to total price
+    const selectedModel = modelPrices.find(model => model.modelname === selectedOptions.modelname);
     if (selectedModel) {
-      totalPrice += selectedModel.price;
+      totalPrice += parseFloat(selectedModel.price); // Ensure the price is treated as a number
     }
   
-    // Find the price of the selected color
-    const selectedColor = colorPrices.find(color => color.colorName === selectedOptions.color);
+    // Find the price of the selected color and add it to total price
+    const selectedColor = colorPrices.find(color => color.colorname === selectedOptions.colorname);
     if (selectedColor) {
-      totalPrice += selectedColor.price;
+      totalPrice += parseFloat(selectedColor.price); // Ensure the price is treated as a number
     }
   
-    // Find the price of the selected engine type
-    const selectedEngineType = engineTypePrices.find(engineType => engineType.engineName === selectedOptions.engineType);
+    // Find the price of the selected engine type and add it to total price
+    const selectedEngineType = engineTypePrices.find(engine => engine.enginename === selectedOptions.enginename);
     if (selectedEngineType) {
-      totalPrice += selectedEngineType.price;
+      totalPrice += parseFloat(selectedEngineType.price); // Ensure the price is treated as a number
     }
   
-    // Find the price of the selected interior
-    const selectedInterior = interiorPrices.find(interior => interior.interiorType === selectedOptions.interior);
+    // Find the price of the selected interior and add it to total price
+    const selectedInterior = interiorPrices.find(interior => interior.interiortype === selectedOptions.interiortype);
     if (selectedInterior) {
-      totalPrice += selectedInterior.price;
+      totalPrice += parseFloat(selectedInterior.price); // Ensure the price is treated as a number
     }
   
     return totalPrice;

@@ -4,26 +4,26 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const ViewCars = () => {
   const [cars, setCars] = useState([]);
-  const navigate = useNavigate(); // For redirection after delete
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCars = async () => {
       try {
         const data = await getAllCars();
-        setCars(data);
+        setCars(data); // Update the state with the fetched cars
       } catch (error) {
         console.error('Error fetching cars:', error);
       }
     };
 
-    fetchCars();
-  }, []);
+    fetchCars(); // Fetch the list of cars when the component mounts
+  }, []); // Empty dependency array ensures the fetch happens on component mount
 
   const handleDelete = async (id) => {
     try {
       await deleteCar(id);
       alert('Car deleted successfully');
-      setCars(cars.filter(car => car.id !== id)); // Remove deleted car from the list
+      setCars(cars.filter(car => car.id !== id)); // Remove the deleted car from the list
     } catch (error) {
       console.error('Error deleting car:', error);
       alert('Failed to delete the car.');

@@ -3,9 +3,9 @@ const MODEL_API_URL = '/api/models';
 // Get all models
 export const getAllModels = async () => {
   try {
-    const response = await fetch(`${MODEL_API_URL}`);
+    const response = await fetch(MODEL_API_URL);
     if (!response.ok) {
-      throw new Error('Error fetching models');
+      throw new Error(`Error fetching models: ${response.statusText}`);
     }
     const data = await response.json();
     return data;
@@ -20,7 +20,7 @@ export const getModel = async (id) => {
   try {
     const response = await fetch(`${MODEL_API_URL}/${id}`);
     if (!response.ok) {
-      throw new Error(`Error fetching model with ID ${id}`);
+      throw new Error(`Error fetching model with ID ${id}: ${response.statusText}`);
     }
     const data = await response.json();
     return data;
@@ -33,7 +33,7 @@ export const getModel = async (id) => {
 // Create a new model
 export const createModel = async (modelData) => {
   try {
-    const response = await fetch(`${MODEL_API_URL}`, {
+    const response = await fetch(MODEL_API_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -41,7 +41,7 @@ export const createModel = async (modelData) => {
       body: JSON.stringify(modelData),
     });
     if (!response.ok) {
-      throw new Error('Error creating model');
+      throw new Error(`Error creating model: ${response.statusText}`);
     }
     const data = await response.json();
     return data;
@@ -62,7 +62,7 @@ export const updateModel = async (id, updatedModelData) => {
       body: JSON.stringify(updatedModelData),
     });
     if (!response.ok) {
-      throw new Error(`Error updating model with ID ${id}`);
+      throw new Error(`Error updating model with ID ${id}: ${response.statusText}`);
     }
     const data = await response.json();
     return data;
@@ -79,7 +79,7 @@ export const deleteModel = async (id) => {
       method: 'DELETE',
     });
     if (!response.ok) {
-      throw new Error(`Error deleting model with ID ${id}`);
+      throw new Error(`Error deleting model with ID ${id}: ${response.statusText}`);
     }
     return true;
   } catch (error) {

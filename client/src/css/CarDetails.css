@@ -1,0 +1,135 @@
+/* General page styling */
+.car-details-container {
+    font-family: 'Arial', sans-serif;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgba(91, 90, 90, 0.3);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1, h2, h3 {
+    color: #343a40;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  p {
+    color: #495057;
+    font-size: 18px;
+    margin: 10px 0;
+  }
+  
+  /* Feature buttons */
+  .feature-buttons {
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 20px;
+  }
+  
+  .feature-buttons button {
+    padding: 10px 20px;
+    border-radius: 25px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .feature-buttons button:hover {
+    background-color: #0056b3;
+  }
+  
+  .feature-buttons button:focus {
+    outline: none;
+    background-color: #0056b3;
+  }
+  
+  /* Feature selection dropdown */
+  select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    margin-bottom: 20px;
+    font-size: 16px;
+  }
+  
+  select:focus {
+    border-color: #80bdff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+  
+  /* Car details */
+  .car-overview {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+  }
+  
+  .car-overview p {
+    font-weight: bold;
+  }
+  
+  /* Update and Delete buttons */
+  .update-button, .delete-button {
+    padding: 12px 20px;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    width: 48%;
+  }
+  
+  .update-button {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .update-button:hover {
+    background-color: #218838;
+  }
+  
+  .delete-button {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  .delete-button:hover {
+    background-color: #c82333;
+  }
+  
+  /* Buttons container */
+  .buttons-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .buttons-container {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .update-button, .delete-button {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  
+    .feature-buttons {
+      flex-direction: column;
+    }
+  
+    .feature-buttons button {
+      margin-bottom: 10px;
+    }
+  }
+  

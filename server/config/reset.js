@@ -24,7 +24,9 @@ const createTables = async () => {
         await pool.query(`
             CREATE TABLE IF NOT EXISTS Color (
                 id SERIAL PRIMARY KEY,
-                colorName VARCHAR(50) NOT NULL
+                colorName VARCHAR(50) NOT NULL,
+                price NUMERIC NOT NULL,
+                image TEXT NOT NULL
             );
         `);
 
@@ -32,7 +34,9 @@ const createTables = async () => {
         await pool.query(`
             CREATE TABLE IF NOT EXISTS EngineType (
                 id SERIAL PRIMARY KEY,
-                engineName VARCHAR(50) NOT NULL
+                engineName VARCHAR(50) NOT NULL,
+                price NUMERIC NOT NULL,
+                image TEXT NOT NULL
             );
         `);
 
@@ -40,7 +44,9 @@ const createTables = async () => {
         await pool.query(`
             CREATE TABLE IF NOT EXISTS Interior (
                 id SERIAL PRIMARY KEY,
-                interiorType VARCHAR(50) NOT NULL
+                interiorType VARCHAR(50) NOT NULL,
+                price NUMERIC NOT NULL,
+                image TEXT NOT NULL
             );
         `);
 
@@ -48,7 +54,9 @@ const createTables = async () => {
         await pool.query(`
             CREATE TABLE IF NOT EXISTS Model (
                 id SERIAL PRIMARY KEY,
-                modelName VARCHAR(50) NOT NULL
+                modelName VARCHAR(50) NOT NULL,
+                price NUMERIC NOT NULL,
+                image TEXT NOT NULL
             );
         `);
 
@@ -59,8 +67,7 @@ const createTables = async () => {
                 modelId INT REFERENCES Model(id),
                 colorId INT REFERENCES Color(id),
                 engineTypeId INT REFERENCES EngineType(id),
-                interiorId INT REFERENCES Interior(id),
-                totalPrice NUMERIC NOT NULL
+                interiorId INT REFERENCES Interior(id)
             );
         `);
 
@@ -73,24 +80,36 @@ const createTables = async () => {
 // Seed the attribute tables
 const seedTables = async () => {
     try {
-        // Seed Color table
+        // Seed Color table with price and image
         for (const color of colorData) {
-            await pool.query('INSERT INTO Color (colorName) VALUES ($1)', [color.colorName]);
+            await pool.query(
+                'INSERT INTO Color (colorName, price, image) VALUES ($1, $2, $3)',
+                [color.colorName, color.price, color.image]
+            );
         }
 
-        // Seed EngineType table
+        // Seed EngineType table with price and image
         for (const engineType of engineTypeData) {
-            await pool.query('INSERT INTO EngineType (engineName) VALUES ($1)', [engineType.engineName]);
+            await pool.query(
+                'INSERT INTO EngineType (engineName, price, image) VALUES ($1, $2, $3)',
+                [engineType.engineName, engineType.price, engineType.image]
+            );
         }
 
-        // Seed Interior table
+        // Seed Interior table with price and image
         for (const interior of interiorData) {
-            await pool.query('INSERT INTO Interior (interiorType) VALUES ($1)', [interior.interiorType]);
+            await pool.query(
+                'INSERT INTO Interior (interiorType, price, image) VALUES ($1, $2, $3)',
+                [interior.interiorType, interior.price, interior.image]
+            );
         }
 
-        // Seed Model table
+        // Seed Model table with price and image
         for (const model of modelData) {
-            await pool.query('INSERT INTO Model (modelName) VALUES ($1)', [model.modelName]);
+            await pool.query(
+                'INSERT INTO Model (modelName, price, image) VALUES ($1, $2, $3)',
+                [model.modelName, model.price, model.image]
+            );
         }
 
         console.log('Attribute tables seeded successfully');
@@ -113,9 +132,9 @@ const seedCustomItems = async () => {
 
             // Insert into CustomItem table
             await pool.query(`
-                INSERT INTO CustomItem (modelId, colorId, engineTypeId, interiorId, totalPrice)
-                VALUES ($1, $2, $3, $4, $5)
-            `, [modelId, colorId, engineTypeId, interiorId, totalPrice]);
+                INSERT INTO CustomItem (modelId, colorId, engineTypeId, interiorId)
+                VALUES ($1, $2, $3, $4)
+            `, [modelId, colorId, engineTypeId, interiorId]);
 
             console.log(`Car ${model} added successfully`);
         }

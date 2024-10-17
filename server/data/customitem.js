@@ -1,51 +1,39 @@
 const carData = [
     {
-        "id": 1,
         "model": "Sedan",
         "color": "Red",
         "engineType": "Gasoline",
-        "interior": "Leather",
-        "totalPrice": 30000
+        "interior": "Leather"
     },
     {
-        "id": 2,
         "model": "SUV",
         "color": "Black",
         "engineType": "Electric",
-        "interior": "Fabric",
-        "totalPrice": 45000
+        "interior": "Fabric"
     },
     {
-        "id": 3,
         "model": "Hatchback",
         "color": "White",
         "engineType": "Hybrid",
-        "interior": "Synthetic Leather",
-        "totalPrice": 35000
+        "interior": "Synthetic Leather"
     },
     {
-        "id": 4,
         "model": "Convertible",
         "color": "Blue",
         "engineType": "Gasoline",
-        "interior": "Leather",
-        "totalPrice": 55000
+        "interior": "Leather"
     },
     {
-        "id": 5,
         "model": "Truck",
         "color": "Silver",
         "engineType": "Diesel",
-        "interior": "Fabric",
-        "totalPrice": 50000
+        "interior": "Fabric"
     },
     {
-        "id": 6,
         "model": "Coupe",
         "color": "Green",
         "engineType": "Electric",
-        "interior": "Synthetic Leather",
-        "totalPrice": 60000
+        "interior": "Synthetic Leather"
     }
 ];
 
