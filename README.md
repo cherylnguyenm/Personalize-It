@@ -1,7 +1,5 @@
 # Custom Car Web App
 
-![Contributors][contributors-shield] ![Forks][forks-shield] ![Stargazers][stars-shield] ![Issues][issues-shield] ![MIT License][license-shield] ![LinkedIn][linkedin-shield]
-
 ## About The Project
 
 This web application allows users to create, customize, and manage their own custom cars. By selecting different features like model, color, engine type, and interior, users can build a car that fits their preferences. The app dynamically updates the total price as users select their desired features, providing a real-time car-building experience.
@@ -16,10 +14,20 @@ This web application allows users to create, customize, and manage their own cus
 
 The app is built with modern technologies for both the front and back end:
 
-* [![React][https://camo.githubusercontent.com/3467eb8e0dc6bdaa8fa6e979185d371ab39c105ec7bd6a01048806b74378d24c/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f52656163742d3230323332413f7374796c653d666f722d7468652d6261646765266c6f676f3d7265616374266c6f676f436f6c6f723d363144414642]][https://react.dev/]
-* [![Node][Node.js]][Node-url]
-* [![Express.js]][Express-url]
-* [![PostgreSQL]][PostgreSQL-url]
+* [![React][React.js]][React-url]
+* [![Node.js][Node.js]][Node-url]
+* [![Express.js][Express.js]][Express-url]
+* [![PostgreSQL][PostgreSQL]][PostgreSQL-url]
+
+<!-- MARKDOWN LINKS & IMAGES -->
+[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[React-url]: https://reactjs.org/
+[Node.js]: https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node-dot-js&logoColor=white
+[Node-url]: https://nodejs.org/
+[Express.js]: https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white
+[Express-url]: https://expressjs.com/
+[PostgreSQL]: https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white
+[PostgreSQL-url]: https://www.postgresql.org/
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -29,7 +37,7 @@ Follow the steps below to get a local copy of the project up and running.
 
 ### Prerequisites
 
-You need Node.js and npm installed on your machine:
+You need <b>Node.js</b> and <b>npm</b> installed on your machine:
 
 ```sh
 npm install npm@latest -g
