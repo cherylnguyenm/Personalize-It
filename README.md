@@ -1,6 +1,7 @@
-# Custom Car Web App
+# Personalize It Web App
 
 ## About The Project
+![Product Name Screen Shot](./client/public/screenshot.png)
 
 This web application allows users to create, customize, and manage their own custom cars. By selecting different features like model, color, engine type, and interior, users can build a car that fits their preferences. The app dynamically updates the total price as users select their desired features, providing a real-time car-building experience.
 
