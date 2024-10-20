@@ -1,55 +1,68 @@
-# WEB103 Project 4 - *Personalize It*
+# Custom Car Web App
 
-Submitted by: **Chau Anh Nguyen**
+![Contributors][contributors-shield] ![Forks][forks-shield] ![Stargazers][stars-shield] ![Issues][issues-shield] ![MIT License][license-shield] ![LinkedIn][linkedin-shield]
 
-About this web app: **This web application is designed to allow users to create, customize, and manage cars with a wide variety of features. Users can select from multiple models, colors, engine types, and interiors, all while viewing corresponding prices and images for each option. The app dynamically updates the total price based on the user’s choices, providing a seamless and real-time customization experience.**
+## About The Project
 
-Time spent: **10** hours
+This web application allows users to create, customize, and manage their own custom cars. By selecting different features like model, color, engine type, and interior, users can build a car that fits their preferences. The app dynamically updates the total price as users select their desired features, providing a real-time car-building experience.
 
-## Required Features
+- **Real-Time Price Calculation**: The price of the car updates dynamically based on selected features.
+- **Comprehensive Feature Options**: The app allows customization from a wide variety of models, colors, engine types, and interior options.
+- **Data Persistence**: Users can create cars, view a list of submitted custom cars, and even edit or delete them from the interface.
 
-The following **required** functionality is completed:
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- Make sure to check off completed functionality below -->
-- [x] **The web app is connected to a PostgreSQL database, with an appropriately structured `CustomCar` table**
-  - [x] **NOTE: Your GIF must include a view of your Railway database that shows the contents of the table used by your app**
-- [x] **The web app uses React to display data from the API**
-- [x] **Users can view a list of options they can select for different aspects of a `CustomCar`**
-- [ ] **On selecting each option, the displayed visual icon for the `CustomCar` updates to match the option the user chose**
-- [x] **The user can submit their choices to save the car to the list of created `CustomCar`**
-- [x] **If a user submits a feature combo that is impossible, they should receive an appropriate error message and the item should not be saved to the database**
-- [x] **The app displays the total price of all features**
-- [x] **Users can view a list of all submitted `CustomCar`**
-- [x] **Users can edit or delete a submitted `CustomCar` from the list view of submitted `CustomCar`**
-- [x] **Users can update or delete `CustomCar` that have been created from the detail page**
+### Built With
 
-The following **optional** features are implemented:
+The app is built with modern technologies for both the front and back end:
 
-- [ ] Selecting particular options prevents incompatible options from being selected even before form submission
+* [![React][React.js]][React-url]
+* [![Node][Node.js]][Node-url]
+* [![Express.js]][Express-url]
+* [![PostgreSQL]][PostgreSQL-url]
 
-The following **additional** features are implemented:
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-- [ ] List anything else that you added to improve the site's functionality!
+## Getting Started
 
-## Video Walkthrough
+Follow the steps below to get a local copy of the project up and running.
 
-Here's a walkthrough of implemented required features:
+### Prerequisites
 
-<img src='https://i.imgur.com/Dsobh7U.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+You need Node.js and npm installed on your machine:
 
-<!-- Replace this with whatever GIF tool you used! -->
-GIF created with LICEcap  
-<!-- Recommended tools:
-[Kap](https://getkap.co/) for macOS
-[ScreenToGif](https://www.screentogif.com/) for Windows
-[peek](https://github.com/phw/peek) for Linux. -->
+```sh
+npm install npm@latest -g
+```
 
-## License
+### Installation
 
-Copyright [2024] [Chau Anh Nguyen]
+1. Clone the repo:
 
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+   ```sh
+   git clone https://github.com/cherylnguyenm/Personalize-It.git
+   ```
 
-> http://www.apache.org/licenses/LICENSE-2.0
+2. Install dependencies:
+    ```sh
+   npm install
+   ```
 
-Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+3. Set up the environment variables for your database and API keys. Create a `.env` file and configure the following:
+    ```sh
+    DB_HOST=your_database_host
+    DB_USER=your_database_user
+    DB_PASSWORD=your_database_password
+    DB_NAME=your_database_name
+    ```
+
+4. Start the development server:
+    ```sh
+    npm start
+    ```
+### Contact
+Chau Anh Nguyen 
+
+Project Link: https://github.com/cherylnguyenm/Personalize-It
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
